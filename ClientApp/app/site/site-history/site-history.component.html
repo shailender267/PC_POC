@@ -1,0 +1,41 @@
+<div id="site" class="tab-pane fade site in active">
+    <div class="tab-body">
+        <div class="tab-header">
+            <h3>Site History</h3>
+            <div class="pull-right">
+                <button class="btn btn-default settings" data-toggle="tooltip" data-placement="top" title="Setting"></button>
+                <button class="btn btn-default filter" data-toggle="tooltip" data-placement="top" title="Filter"></button>
+                <button class="btn btn-default siteNote" data-toggle="tooltip" data-placement="top" title="Site Note"></button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Activity</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="siteActivityHistory && siteActivityHistory.length > 0">
+                <tr *ngFor="let activity of siteActivityHistory">
+                    <td>{{activity.date | date: 'MM/dd/yyyy'}}</td>
+                    <td>{{activity.activity}}</td>
+                    <td><span class="link-primany">{{activity.status}}</span></td>
+                    <td>{{activity.notes}}</td>
+                </tr>
+               
+
+            </tbody>
+        </table>
+
+        <div class="site-footer">
+            <p>
+                <span>Site Fields</span><br />
+                Sales Rep: Jim Smith<br />
+                Regin: West
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<body>    
+    <div class="container-fluid">
+        <div *ngIf="homeProviderService.selectedContact" class="row">            
+            <div class="col-md-9">
+               <h1>Contact Screen</h1>
+                <br />
+                <span>Contact - {{homeProviderService.selectedContact.contactName}}  has been actioned on.</span>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,96 @@
+<div id="contact" class="tab-pane contact-tab">
+    <div class="tab-body">
+        <div class="tab-header">
+            <div class="pull-right">
+                <button class="btn btn-default changeSiteLocation" data-toggle="tooltip" data-placement="top" title="Change Site Location"></button>
+                <button class="btn btn-default contactNote" data-toggle="tooltip" data-placement="top" title="Contact Note"></button>
+                <button class="btn btn-default previous" data-toggle="tooltip" data-placement="top" title="Previous"></button>
+                <button class="btn btn-default next" data-toggle="tooltip" data-placement="top" title="Next"></button>
+            </div>
+        </div>
+        <div class="contactInfo-panel">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th rowspan="2" colspan="2"><button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></button></th>
+                        <th>Contact Name</th>
+                        <th>Preferred Name</th>
+                        <th>Title</th>
+                        <th>Level</th>
+                        <th>Buying Group Persona</th>
+                    </tr>
+                    <tr *ngIf="siteService.primaryContact">
+                        <td>{{siteService.primaryContact.contactName}}</td>
+                        <td>{{siteService.primaryContact.contactName}}</td>
+                        <td>{{siteService.primaryContact.title}}</td>
+                        <td>{{siteService.primaryContact.level}}</td>
+                        <td>{{siteService.primaryContact.buyingGroup}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#call" href="#callGuide">
+                        Call Guide/Questionnaire
+                    </a>
+                </h4>
+            </div>
+            <div id="callGuide" class="panel-collapse collapse in">
+                <div class="contactFields-footer">
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged.
+                    </p>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#contactHistory" href="#contactHistory">
+                        Contact History
+                    </a>
+                    <div class="pull-right cHis-btn-main">
+                        <button class="btn btn-default settings" data-toggle="tooltip" data-placement="top" title="" data-original-title="Setting"></button>
+                        <button class="btn btn-default filter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Filter"></button>
+                    </div>
+                </h4>
+            </div>
+            <div id="contactHistory" class="panel-collapse collapse in">
+                <div class="row contactHistory">
+                    <div class="col-md-3">1/16/18</div>
+                    <div class="col-md-3">Call Sarah Tantum</div>
+                    <div class="col-md-3 txt-info">Left Message</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#contactFields" href="#contactFields">
+                        Contact Fields
+                    </a>
+                </h4>
+            </div>
+            <div id="contactFields" class="panel-collapse collapse in">
+                <div class="contactFields-footer">
+                    <p>
+                        Number of Years at Company: 7years<br />
+                        Number of Positions held: 4
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

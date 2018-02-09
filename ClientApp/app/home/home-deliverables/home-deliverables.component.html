@@ -1,0 +1,38 @@
+<div class="col-md-5">
+    <div class="highlight">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Site Name</th>
+                    <th>Contact Name</th>
+                    <th>Date Delivered</th>
+                    <th>Last Date Touched</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="homeProviderService.deliverableList && homeProviderService.deliverableList.length > 0" style="cursor:pointer">
+                <tr *ngFor="let deliverable of homeProviderService.deliverableList" (click)="openAccount(account)">
+                    <td>{{deliverable.siteName}}</td>
+                    <td>{{titlecasePipe.transform(deliverable.contactName)}}</td>
+                    <td>{{deliverable.dateDelivered | date: 'MM/dd/yyyy'}}</td>
+                    <td>{{deliverable.lastDateTouched | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="homeProviderService.loadingList">
+                <tr>
+                    <td>
+                        <img src="../../../assets/images/loading_animation.gif" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!homeProviderService.loadingList && (!homeProviderService.deliverableList || homeProviderService.deliverableList.length == 0)">
+                <tr>
+                    <td>No Deliverable found</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

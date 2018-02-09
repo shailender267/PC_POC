@@ -1,0 +1,31 @@
+<div id="listofContacts" class="tab-pane listofContacts">
+    <div class="tab-body">
+        <div class="tab-header">
+            <div class="pull-right">
+                <button class="btn btn-default settings" data-toggle="tooltip" data-placement="top" title="Setting"></button>
+                <button class="btn btn-default filter" data-toggle="tooltip" data-placement="top" title="Filter"></button>
+                <button class="btn btn-default contactReferral" data-toggle="tooltip" data-placement="top" title="Contact Referral"></button>   
+            </div>
+        </div>
+        <table  class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Contact Name</th>
+                    <th>Title</th>
+                    <th>Level</th>
+                    <th>Buying Group Persona</th>
+                    <th>Last Contact</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="contacts">
+                <tr *ngFor="let contact of contacts">
+                    <td>{{contact.contactName}}</td>
+                    <td>{{contact.title}}</td>
+                    <td class="level">{{contact.level}}</td>
+                    <td>{{contact.buyingGroup}}</td>
+                    <td>{{contact.lastContactedDate | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

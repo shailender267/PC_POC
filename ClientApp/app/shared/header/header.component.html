@@ -1,0 +1,27 @@
+﻿<!-- header starts here -->
+<header>
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left navbar-header">
+            <li><a href="#" class="navbar-brand"><img src="../../../assets/images/televerde_logo.png" alt="Televerde Logo" /></a></li>
+            <li>
+                <select *ngIf="homeProviderService.campaigns" class="custom-select" (change)="onClientChange($event.target.value)">
+                    <option value="" disabled>Please Select Campaign</option>
+                    <option *ngFor="let campaign of homeProviderService.campaigns" value={{campaign.campaignId}}>{{campaign.displayName}}</option>
+                </select>
+                <select *ngIf="!homeProviderService.campaigns" class="custom-select">
+                    <option disabled value="">No Campaign Assigned</option>
+                </select>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right navbar-user">
+            <li><a href="#"><img src="../../../assets/images/info_icon.png" alt="info" /></a></li>
+            <li><a href="#"><img src="../../../assets/images/user_icon.png" alt="user" />&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+        </ul>
+        <header-search></header-search>
+    </div>
+</header>
+<div *ngIf="homeProviderService.loadingResult" class="load-icon">
+    <img src="../../../assets/images/Spinner.gif" />
+</div>
+<!-- header ends here -->

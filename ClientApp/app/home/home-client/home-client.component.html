@@ -1,0 +1,79 @@
+<ngx-charts-chart [view]="[1000, 700]">
+    <svg:g [attr.transform]="transform" class="force-directed-graph ">
+        <svg:g class="links">
+            <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
+                <svg:line strokeWidth="20" class="edge"
+                          [attr.x1]="link.source.x*6"
+                          [attr.y1]="link.source.y*6"
+                          [attr.x2]="link.target.x*6"
+                          [attr.y2]="link.target.y*6" />
+            </svg:g>
+        </svg:g>
+        <svg:g class="nodes">
+            <defs>
+                <pattern id="imageClient" x="0%" y="0%" height="100%" width="100%"
+                         viewBox="0 0 512 512">
+                    <image x="0%" y="0%" width="512" height="512" href="./Images/Client.png"></image>
+                </pattern>
+            </defs>
+            <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy"
+                    ngx-tooltip
+                       [tooltipDisabled]="false"
+                       [tooltipPlacement]="'top'"
+                       [tooltipType]="'tooltip'"
+                       [tooltipTitle]="tooltipTemplate ? undefined : node.value"
+                       [tooltipTemplate]="tooltipTemplate"
+                       [tooltipContext]="node">
+                <svg:g *ngIf="node.clientName != ''"
+                       [attr.transform]="getRectTransform(node)">
+                    <rect rx="10" ry="80" [attr.width]="getRectWidth(node)" [attr.height]="rectHeight" stroke="#ccc" fill="white" stroke-width="0.5" />
+                    <text dx="22" dy="20" fill="#458ace" class="node_txt">{{getCampaignName(node)}}</text>
+                </svg:g>
+                <svg:g style="cursor:pointer" (click)="getAccounts(node)"
+                       [attr.transform]="'translate(' + node.x*6 + ',' + node.y*6 + ')'"
+                       ngx-tooltip
+                       [tooltipDisabled]="false"
+                       [tooltipPlacement]="'bottom'"
+                       [tooltipType]="'tooltip'"
+                       [tooltipTitle]="tooltipTemplate ? undefined : 'Number Of Accounts Assigned'"
+                       [tooltipTemplate]="tooltipTemplate"
+                       [tooltipContext]="node">
+                    <circle *ngIf="node.clientName != '' && !node.isAccountSelected" r="18" stroke="#ccc" fill="white" stroke-width="1" />
+                    <circle *ngIf="node.clientName != '' && node.isAccountSelected" r="18" stroke="#ccc" fill="orange" stroke-width="1" />
+                    <text *ngIf="node.clientName != ''" dx="-9" dy="4" fill="#2f485f" class="node_txt">{{node.numberOfAccountsAssined }}</text>
+                </svg:g>
+                <svg:g [attr.transform]="'translate(' + node.x*6 + ',' + node.y*6 + ')'">
+                    <circle *ngIf="node.clientName === ''" id="sd" class="medium" r="40" fill="url(#imageClient)" stroke="black" stroke-width="0" />
+                </svg:g>
+                <!--<svg:g *ngIf="node.clientName === ''" [attr.transform]="getClientNameTransform(node)">
+                    <rect rx="10" ry="80" [attr.width]="getRectWidth(node)" [attr.height]="rectHeight" stroke="#ccc" fill="white" stroke-width="0.5" />
+                    <text dx="20" dy="20" fill="#458ace" class="node_txt_main">{{node.value}}</text>
+                </svg:g>-->
+                <svg:g style="cursor:pointer" (click)="getResponders(node)" *ngIf="node.clientName != ''" [attr.transform]="getCircleTransform(node)"
+                       ngx-tooltip
+                       [tooltipDisabled]="false"
+                       [tooltipPlacement]="'bottom'"
+                       [tooltipType]="'tooltip'"
+                       [tooltipTitle]="tooltipTemplate ? undefined : 'Number Of Responders Assigned'"
+                       [tooltipTemplate]="tooltipTemplate"
+                       [tooltipContext]="node">
+                    <circle r="18" *ngIf="!node.isResponderSelected" stroke="#ccc" fill="white" stroke-width="1" />
+                    <circle r="18" *ngIf="node.isResponderSelected" stroke="#ccc" fill="orange" stroke-width="1" />
+                    <text dx="-5" dy="4" fill="#e70d0d" class="node_txt">{{node.numberOfRespondersAssigned  }}</text>
+                </svg:g>
+                <svg:g style="cursor:pointer" (click)="getDeliverables(node)" *ngIf="node.clientName != ''" [attr.transform]="getCentreCircleTransform(node)"
+                       ngx-tooltip
+                       [tooltipDisabled]="false"
+                       [tooltipPlacement]="'bottom'"
+                       [tooltipType]="'tooltip'"
+                       [tooltipTitle]="tooltipTemplate ? undefined : 'Assigned Deliverables For Campaign'"
+                       [tooltipTemplate]="tooltipTemplate"
+                       [tooltipContext]="node">
+                    <circle r="18" *ngIf="!node.isDeliverableSelected" stroke="#ccc" fill="white" stroke-width="1" />
+                    <circle r="18" *ngIf="node.isDeliverableSelected" stroke="#ccc" fill="orange" stroke-width="1" />
+                    <text dx="-8" dy="5" fill="#29C63E" class="node_txt">{{node.assignedDeliverablesForCampaign }}</text>
+                </svg:g>
+            </svg:g>
+        </svg:g>
+    </svg:g>
+</ngx-charts-chart>

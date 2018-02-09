@@ -1,0 +1,34 @@
+<div class="col-md-5">
+    <div class="highlight">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Last Date Worked</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="homeProviderService.accountList && homeProviderService.accountList.length > 0" style="cursor:pointer">
+                <tr *ngFor="let account of homeProviderService.accountList" (click)="openAccount(account)">
+                    <td>{{account.accountName}}</td>
+                    <td>{{account.lastModifiedDate | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="homeProviderService.loadingList">
+                <tr>
+                    <td>
+                        <img src="../../../assets/images/loading_animation.gif" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!homeProviderService.loadingList && (!homeProviderService.accountList || homeProviderService.accountList.length == 0)">
+                <tr>
+                    <td>No Accounts found</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

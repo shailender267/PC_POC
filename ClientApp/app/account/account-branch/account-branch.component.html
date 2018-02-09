@@ -1,0 +1,86 @@
+<ngx-charts-chart [view]="[1200, 800]">
+    <svg:g [attr.transform]="transform" class="force-directed-graph ">
+        <svg:g class="links">
+            <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
+                <svg:line strokeWidth="20" class="edge"
+                          [attr.x1]="link.source.x*8"
+                          [attr.y1]="link.source.y*8"
+                          [attr.x2]="link.target.x*8"
+                          [attr.y2]="link.target.y*8" />
+            </svg:g>
+        </svg:g>
+        <svg:g class="nodes" style="cursor:pointer">
+            <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy">
+                <svg:g (click)="onClick(node)"
+                       [attr.transform]="getRectTransform(node)"
+                        ngx-tooltip
+                       [tooltipDisabled]="false"
+                       [tooltipPlacement]="'bottom'"
+                       [tooltipType]="'tooltip'"
+                       [tooltipTitle]="tooltipTemplate ? undefined : node.value"
+                       [tooltipTemplate]="tooltipTemplate"
+                       [tooltipContext]="node">
+                    <defs>
+                        <pattern id="imageChampions" x="0%" y="0%" height="100%" width="100%"
+                                 viewBox="0 0 512 512">
+                            <image x="0%" y="0%" width="512" height="512" href="./Images/Champions.png"></image>
+                        </pattern>
+                    </defs>
+
+                    <defs>
+                        <pattern id="imageInfluencers" x="0%" y="0%" height="100%" width="100%"
+                                 viewBox="0 0 512 512">
+                            <image x="0%" y="0%" width="512" height="512" href="./Images/Influencers.png"></image>
+                        </pattern>
+                    </defs>
+                    <defs>
+                        <pattern id="imageRatifiers" x="0%" y="0%" height="100%" width="100%"
+                                 viewBox="0 0 512 512">
+                            <image x="0%" y="0%" width="512" height="512" href="./Images/Ratifiers.png"></image>
+                        </pattern>
+                    </defs>
+                    <rect *ngIf="!node.hasAdditionalInfo " fill-opacity="0.8" [attr.width]="getRectWidth(node)" [attr.height]="rectHeight" rx="10" ry="80" stroke="#ccc" fill="white" stroke-width="0.5" />
+                    <rect *ngIf="node.hasAdditionalInfo " fill-opacity="0.8" rx="10" ry="80" [attr.width]="getRectWidth(node)" height=150 stroke="#ccc" fill="white" stroke-width="0.5" />
+                    <text [attr.dx]="getTextOffset_X(node)" dy="20" *ngIf="!node.isHeadQuarter && (!node.handRaised && !node.hasAdditionalInfo) " fill="#458ace" class="node_txt">{{node.siteName}}</text>
+                    <text [attr.dx]="getTextOffset_X(node)" dy="20" *ngIf="!node.isHeadQuarter && (node.handRaised && !node.hasAdditionalInfo)" fill="#e74a25" class="node_txt">{{node.siteName}}</text>
+                    <text [attr.dx]="getTextOffset_X(node)" dy="20" *ngIf="node.isHeadQuarter" fill="darkorange" class="node_txt_main">{{node.siteName}}</text>
+                    <text *ngIf="node.hasAdditionalInfo" dx="20" dy="20" fill="#458ace">
+                        <tspan [attr.dx]="getTextOffset_X(node)" dy="1.4em" class="node_txt"> {{node.siteName}}</tspan>
+                        <tspan x="0" fill="#2f485f" [attr.dx]="getTextOffset_X(node) + 20" dy="2.4em" class="node_cir_subHead">Champions : {{node.champions}}</tspan>
+                        <tspan x="0" fill="#5f6f7e" [attr.dx]="getTextOffset_X(node)+ 30" dy="1.4em" class="node_cir_subtxt">Past : {{node.champions}}</tspan>
+                        <tspan x="0" fill="#454545" [attr.dx]="getTextOffset_X(node)+ 25" dy="1.8em" class="node_cir_subHead">Ratifiers : 1</tspan>
+                        <tspan x="0" fill="#454545" [attr.dx]="getTextOffset_X(node)+ 25" dy="1.8em" class="node_cir_subHead">Influencers : {{node.influences}}</tspan>
+                        <tspan x="0" fill="#5f6f7e" [attr.dx]="getTextOffset_X(node)+ 30" dy="1.4em" class="node_cir_subtxt">Past : {{node.influences}}</tspan>
+                    </text>
+                </svg:g>
+
+                <svg:g [attr.transform]="getRectTransform(node)">
+                    <circle [attr.cx]="getTextOffset_X(node)+8" cy="48" *ngIf="node.hasAdditionalInfo" r="8" fill="url(#imageChampions)" stroke="#ccc" stroke-width="0" />
+                    <circle [attr.cx]="getTextOffset_X(node)+8" cy="92" *ngIf="node.hasAdditionalInfo" r="8" fill="url(#imageRatifiers)" stroke="#ccc" stroke-width="0" />
+                    <circle [attr.cx]="getTextOffset_X(node)+8" cy="115" *ngIf="node.hasAdditionalInfo" r="8" fill="url(#imageInfluencers)" stroke="#ccc" stroke-width="0" />
+                </svg:g>
+                <svg:g *ngIf="node.isRegionalHeadQuarter || node.isDomesticHeadquarter "
+                       [attr.transform]="getRegionalTransform(node)"
+                       (click)="onExpand(node)">
+                    <circle r="10" stroke="black" fill="gold" stroke-width="2"></circle>
+                    <text *ngIf="!node.isHeadQuarter" dx="-4" dy="6" style="font-size:100%;font-weight:bold;"> + </text>
+                    <text *ngIf="node.isHeadQuarter" dx="-6" dy="2" style="font-size:85%;font-weight:bold;"> ... </text>
+                </svg:g>
+                <svg:g (click)="getContacts(node)"
+                       [attr.transform]="'translate(' + node.x*8 + ',' + node.y*8 + ')'">
+                    <circle *ngIf="!node.isHeadQuarter" [attr.r]="outerCircleRadius" stroke="#ccc" fill="white" stroke-width="1" />
+                    <circle *ngIf="node.isHeadQuarter && (!node.isRegionalHeadQuarter || !node.isDomesticHeadquarter )" r="30" stroke="#ff8624" fill="#ff8624" stroke-width="1" />
+                    <circle *ngIf="node.isHeadQuarter && (node.isRegionalHeadQuarter || node.isDomesticHeadquarter )" r="30" stroke="#ccc" fill="deepskyblue" stroke-width="1" />
+                    <text dx="-8" dy="5" *ngIf="!node.isHeadQuarter" class="node_cir_txt">{{node.contacts}}</text>
+                    <defs>
+                        <pattern id="image" x="0%" y="0%" height="100%" width="100%"
+                                 viewBox="0 0 512 512">
+                            <image x="0%" y="0%" width="512" height="512" href="./Images/headquarters.png"></image>
+                        </pattern>
+                    </defs>
+                    <circle *ngIf="node.isHeadQuarter" id="sd" r="30" fill="url(#image)" stroke="#ccc" stroke-width="0" />
+                </svg:g>
+            </svg:g>
+        </svg:g>
+    </svg:g>
+</ngx-charts-chart>

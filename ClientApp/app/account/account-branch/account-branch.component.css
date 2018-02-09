@@ -1,0 +1,35 @@
+.edge {
+    stroke: #ccc;
+}
+
+.node_txt {
+    font-size: 14px;
+    font-weight: bold;
+    color: #458ace;
+    font-family: 'Open Sans', sans-serif;
+}
+.node_txt_main {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+.node_cir_txt {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2f485f;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.node_cir_subHead {
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.node_cir_subtxt {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ngx-charts-outer {
+    padding-top: 10px;
+}

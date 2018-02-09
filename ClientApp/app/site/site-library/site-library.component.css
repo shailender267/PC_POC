@@ -1,0 +1,20 @@
+/* library tab css starts */
+.library ul {
+    padding-left: 0px;
+}
+
+    .library ul li {
+        list-style: none;
+        line-height: 2.2em;
+    }
+
+        .library ul li a {
+            color: #656d70;
+            font-size: 16px;
+            text-decoration: underline;
+        }
+
+.library .tab-body {
+    padding: 20px;
+}
+/* library tab css ends */

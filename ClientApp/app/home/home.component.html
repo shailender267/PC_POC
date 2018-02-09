@@ -1,0 +1,67 @@
+<body>
+    <nav class="navbar navbar-default mega-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MainMenu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="MainMenu">
+                <ul class="nav navbar-nav menu-list">
+                    <li class="active"><a href="#">Account List</a></li>
+                    <li><a href="#">Scheduled Calls</a></li>
+                    <li><a href="#">Requalify Deliverable</a></li>
+                    <li><a href="#">Inbound Messages</a></li>
+                    <li><a href="#">Inprocess Records</a></li>
+                    <li><a href="#">Approve Phone Numbers</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <home-client *ngIf="homeProviderService.graph" [homeProviderService]="homeProviderService" [links]="homeProviderService.graph.links" [nodes]="homeProviderService.graph.nodes" [view]="homeProviderService.view"></home-client>
+            </div>
+            <home-account *ngIf="homeProviderService.loadAccounts"></home-account>
+            <home-deliverables *ngIf="homeProviderService.loadDeliverables"></home-deliverables>
+            <home-responders *ngIf="homeProviderService.loadResponders"></home-responders>
+            <div *ngIf="!homeProviderService.selectedCampaign && !homeProviderService.campaigns" class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-5 campaign_box">
+                            <div class="campaign_box_img">
+                                <img src="../../assets/images/no_campaigns_assigned.png" class="img-responsive" alt="No Assigned Image">
+                            </div>
+                            <div class="campaign_box_txt">
+                                <p class="bold">Oops Seems like No Campaign is Assigned.</p>
+                                <p>No campaign is Assigned currently. Please see supervisor for assistance.</p>
+                                <button type="button" class="btn btn-primary btn-acty">Supervisor Assistance</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="homeProviderService.campaigns && !homeProviderService.selectedCampaign" class="col-md-12">
+                <div class="row">
+                    <div class="col-md-5 campaign_box">
+                        <div class="campaign_box_img">
+                            <img src="../../assets/images/no_campaign_selected.png" class="img-responsive" alt="No Assigned Image">
+                        </div>
+                        <div class="campaign_box_txt">
+                            <p class="bold">Oops Seems like No Campaign is Selected.</p>
+                            <p>No campaign is selected currently. Please select a campaign from select campaign.</p>
+                            <button type="button" class="btn btn-primary btn-acty">Please select Campaign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="homeProviderService.loadingResult"  class="load-icon">
+        <img src="../../assets/images/Spinner.gif" />
+    </div>
+</body>

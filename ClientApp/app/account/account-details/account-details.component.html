@@ -1,0 +1,45 @@
+<div class="col-md-3">
+    <div class="sidebar1">
+        <div *ngIf="homeProviderService.selectedAccount" class="sidebar1-box-highlight">
+            <ul>
+                <li>Total Employees<span> {{homeProviderService.selectedAccount.totalEmployees}}</span></li>
+                <li>Revenue<span>{{homeProviderService.selectedAccount.revenueCurrency}} {{homeProviderService.selectedAccount.revenue.toLocaleString()}} </span></li>
+                <li>Industry<span> {{homeProviderService.selectedAccount.industry}}</span></li>
+                <li>Website<span> {{homeProviderService.selectedAccount.website}}</span></li>
+            </ul>
+        </div>
+        <!-- collapse -->
+        <div class="collapse-panel">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="icons ico-champions"></i>
+                            <a data-toggle="collapse" data-parent="#accordion" (click)="expandChampions = !expandChampions" [ngClass]="{'collapsed':!expandChampions}">
+                                Champions
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" *ngIf="expandChampions">
+                        <div class="panel-body">
+                            Past 7 <
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="icons ico-ratifiers"></i>
+                            <a data-toggle="collapse" data-parent="#accordion" (click)="expandRatifiers = !expandRatifiers" [ngClass]="{'collapsed':!expandRatifiers}">Ratifiers </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" *ngIf="expandRatifiers">
+                        <div class="panel-body">Ratifiers body</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- collapse -->
+    </div>
+</div>

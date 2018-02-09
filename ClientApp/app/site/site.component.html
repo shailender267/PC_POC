@@ -1,0 +1,201 @@
+<body>
+    <nav class="navbar navbar-default mega-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MainMenu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="MainMenu">
+                <ul class="nav navbar-nav menu-list">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row mainBody">
+                    <div class="col-md-6">
+                        <div class="panel panel-default panel-boxes">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Site Info</h3>
+                                <button class="btn btn-default pull-right edit"></button>
+                            </div>
+                            <div class="panel-body" *ngIf="site">
+                                <address>
+                                    {{site.siteName}}<br>
+                                    {{siteAddress(site)}}<br>
+                                    {{site.city}}<br>
+                                    {{site.state}}<br>
+                                    {{site.country}}<br>
+                                    {{site.postalCode}}
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default panel-boxes">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Firmographics</h3>
+                                <button class="btn btn-default pull-right filter"></button>
+                                <button class="btn btn-default pull-right settings"></button>
+                                <button class="btn btn-default pull-right edit"></button>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>Site Employees: <span>{{siteService.selectedSite.localEmployeeCount}}</span></li>
+                                    <li>Account Emloyees: <span>500</span></li>
+                                    <li>Site Revenue: <span>{{siteService.selectedSite.revenueCurrency}}  {{siteService.selectedSite.revenue}}</span></li>
+                                    <li>Account Revenue: <span>30.0M</span></li>
+                                    <li>Account Website: <span>televerde.com</span></li>
+                                </ul>
+                                <p class="btm-link"><a href="#">More...</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="fileTab">
+                            <tabs>
+                                <tab tabTitle="Site" active="true"> <site-history></site-history></tab>
+                                <tab tabTitle="Contact" active="true"> <site-contact></site-contact></tab>
+                                <tab tabTitle="List of Contacts" active="true"> <site-listOfContacts></site-listOfContacts></tab>
+                                <tab tabTitle="Library" active="true"> <site-library></site-library></tab>
+                            </tabs>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- left main ends here -->
+            <!-- right section starts here -->
+            <div class="col-md-3">
+                <!--trending starts here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-boxes trending-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Trending</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>
+                                        <div class="post-img">
+                                            <img src="../../assets/images/linkedin_icon.png" class="img-responsive" alt="post image">
+                                        </div>
+                                        <span>
+                                            We have partnered with Linkedin to tell out story.
+                                            Take a look <a href="#">#Real Sales #ESF17 #Televerde</a>
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <div class="post-img">
+                                            <img src="../../assets/images/face_icon.png" class="img-responsive" alt="post image">
+                                        </div>
+                                        <span>
+                                            We have partnered with Linkedin to tell out story.
+                                            Take a look <a href="#">#Real Sales</a>
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <div class="post-img">
+                                            <img src="../../assets/images/green_dot.png" class="img-responsive" alt="post image">
+                                        </div>
+                                        <span>
+                                            We have partnered with Linkedin to tell out story.
+                                            Take a look <a href="#">#Real Sales</a>
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <div class="post-img">
+                                            <img src="../../assets/images/grey_dot.png" class="img-responsive" alt="post image">
+                                        </div>
+                                        <span>We have partnered with Linkedin to tell out story</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- trending ends here -->
+                <!--contacts starts here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-boxes contacts-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Contact</h3>
+                                <button class="btn btn-default pull-right edit"></button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="con-row">
+                                    <div class="con-lft">Site#</div>
+                                    <div class="con-rht">
+                                        Contact Extensioin<br>
+                                        480-711-6700*6765
+                                    </div>
+                                </div>
+
+                                <div class="con-row">
+                                    <div class="con-lft">Contact#</div>
+                                    <div class="con-rht">
+                                        480-711-6700*6765<br>
+                                        480-711-6700*6765
+                                    </div>
+                                </div>
+
+                                <div class="con-row">
+                                    <div class="con-lft">Contact Email#</div>
+                                    <div class="con-rht">
+                                        Sarah.tantum@televerde.com
+                                    </div>
+                                </div>
+
+
+                                <div class="con-row">
+                                    <div class="con-lft">Contact Social Handle#</div>
+                                    <div class="con-rht">
+                                        Stantum@televerde.com
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- contacts ends here -->
+                <!--actions starts here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-boxes actions-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Actions</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li><a href="#">Conversation Result</a></li>
+                                    <li><a href="#">Scheduled follow up</a></li>
+                                    <li><a href="#">Site Referral</a></li>
+                                    <li><a href="#">Deliverable Status</a></li>
+                                    <li><a href="#">Deliverable Note</a></li>
+                                    <li><a href="#">Complete Site</a></li>
+                                    <li><a href="#">Complete Note</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- actions ends here -->
+            </div>
+            <!-- right section ends here -->
+        </div>
+    </div>
+    <!-- body ends here -->
+</body>
